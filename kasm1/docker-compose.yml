@@ -1,0 +1,8 @@
+version: '3'
+services:
+  ubuntu1:
+    image: kasmweb/doom:1.14.0
+    ports:
+      - 6901:6901
+    environment:
+      - VNC_PW=abc123.

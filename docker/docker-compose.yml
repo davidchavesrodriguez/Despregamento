@@ -1,0 +1,45 @@
+version: '3'
+services: 
+  web:
+    build: apache
+    ports:
+      - 8000:80
+    volumes:
+      - ./html:/usr/local/apache2/htdocs
+    networks:
+      - rede1
+  bd:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123.
+      - MYSQL_DATABASE=bd1
+      - MYSQL_USER=pepe
+      - MYSQL_PASSWORD=abc123.
+    volumes:
+      - datos:/var/lib/mysql
+      - ./bd:/bd
+      - ./bd/backup.bd1.sql:/docker-entrypoint-initdb.d/backup.db1.sql
+    networks:
+      - rede1
+      - rede2
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      # - PMA_ARBITRARY=1
+      - PMA_HOST=bd
+    networks:
+      - rede2
+networks:
+  rede1:
+  rede2:
+
+
+
+
+
+volumes:
+  datos:

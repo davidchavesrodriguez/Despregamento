@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: apache
+    ports:
+      - 8000:80
+    volumes:
+      - ./apache/test.lan.conf:/etc/apache2/sites-enabled/test.lan.conf
+      - ./apache/apache2.conf:/etc/apache2/apache2.conf
+      - ./html:/web/test.lan
